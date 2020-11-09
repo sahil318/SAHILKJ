@@ -1,0 +1,188 @@
+import java.util.Scanner;
+
+//1. Write a program to merge two arrays of integers by reading one number at a time from
+//   each array until one of the array is exhausted, and then concatenating the remaining numbers.
+//   Input: [23,60,94,3,102] and [42,16,74]
+//   Output: [23,42,60,16,94,74,3,102]
+
+class Assignment3
+{
+    public static void main(String [] args)
+    {
+        int i;
+        int arr[]=new int[]{23,60,94,3,102};
+        int arr1[]=new int[]{42,16,74};
+                
+        for(i=0;i<5;i++)
+        {
+            if(i<3)
+            System.out.print(arr[i]+", "+arr1[i]+", ");
+            else
+                System.out.print(arr[i]+", ");
+        }
+        System.out.println();
+    }
+}
+
+
+
+
+
+//2. Write a program which takes an array of integers and prints the running average of
+//   3 consecutive integers. In case the array has fewer than 3 integers, there should be no output.
+//   Input: [5,14,35,89,140]
+//   Output: [18, 46, 88]
+//   (Explanation: 18=(5+14+35/3, 46=(14+35+89)/3, ...)
+
+class Assignment3
+{
+    public static void main(String [] args)
+    {
+        int i,j,sum=0,avg=0;
+        int arr[]=new int[]{5,14,35,89,140};
+                
+        for(i=0;i<5;i++)
+        {
+            if(i<3)
+            {
+                sum=arr[i]+arr[i+1]+arr[i+2];
+                avg=sum/3;
+                System.out.print(avg+", ");
+            }
+        }
+        System.out.println();
+    }
+}
+
+
+
+
+
+//3. Write a program which generates the series 1,4,27,16,125,36.
+
+class Assignment3
+{
+    public static void main(String [] args)
+    {
+        int i,j,sum=0,avg=0;
+                
+        for(i=1;i<=6;i++)
+        {
+            if(i%2==0)
+                System.out.print(i*i+", ");
+            else
+                System.out.print(i*i*i+", ");
+        }
+        System.out.println();
+    }
+}
+
+
+
+
+
+//4. Given an array of integers, print whether the numbers are in
+//   ascending order or in descending order or in random order without sorting.
+//   Input: [5,14,35,90,139] Output: Ascending
+//   Input: [88,67,35,14,-12] Output: Descending
+//   Input: [65,14,129,34,7] Output: Random
+
+class Assignment3
+{
+    public static void main(String [] args)
+    {
+        int i,j,Asc=0,Desc=0;
+        Scanner sc=new Scanner(System.in);
+        
+        int arr[]=new int[5];
+        
+        for(i=0;i<5;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        sc.close();
+                
+        for(i=0;i<4;i++)
+        {
+            for(j=i+1;j<5;j++)
+            {
+                if(arr[i]<arr[j])
+                    Asc++;
+                else if(arr[i]>arr[j])
+                    Desc++;
+            }
+        }
+        
+        if(Asc==10)
+            System.out.println("Ascending");
+        else if(Desc==10)
+            System.out.println("Descending");
+        else
+            System.out.println("Random");
+    }
+}
+
+
+
+
+
+//5. Write a function which accepts an floating point number and counts the number of decimal
+//   places in the number without using a string.
+//   Input: 45.286 Output: 3
+//   Input: 3.14159 Output: 5
+
+import java.util.Scanner;
+class Assignment3
+{
+    public static void main(String[] args) 
+	{ 
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter any floting number");
+		float x =sc.nextFloat(); 
+		sc.close();
+        int count=0;
+        do
+    	{
+    	    x =x*10;
+    		count++ ;
+    	} 
+        while(x != (int)x);
+	System.out.println("Digits after decimal are: "+count);
+	} 
+}
+
+
+
+
+
+//6. Print the third-largest number in an array without sorting it.
+//   Input: [ 24,54,31,16,82,45,67]
+//   Output: 54 (82 and 67 are the largest and second-largest)
+
+class Assignment3
+{
+    public static void main(String [] args)
+    {
+        int i,y=0,x=0,z=0;
+        int arr[]=new int[]{24,54,31,16,82,45,67};
+        
+        for(i=0;i<7;i++)
+        {
+            if(arr[i]>y)
+                y=arr[i];
+        }
+        
+        for(i=0;i<7;i++)
+        {
+            if(arr[i]>x && arr[i]<y)
+                x=arr[i];
+        }
+        
+        for(i=0;i<7;i++)
+        {
+            if(arr[i]>z && arr[i]<x)
+                z=arr[i];
+        }
+        System.out.println(z);
+    }
+}
