@@ -1,0 +1,89 @@
+//DBT: Assignment-1
+
+create database Assignment_1;
+show databases;
+show tables;
+use Assignment_1;
+
+1)Create the table Member, Books and Issue without any constraints as mentioned in the schema description above:
+
+	create table Member_1 (
+	Member_Id int(5) Primary key, 
+	Member_Name varchar(30),
+	Member_address varchar(50), 
+	Acc_Open_Date date, 
+	Membership_type varchar(20),
+	Penalty_Amount int(7)
+	);
+
+	create table Books (
+	Book_No int(6),
+	Book_Name varchar(30),
+	Author_name varchar(30),
+	Cost int(7),
+	Category char(10)
+	);
+
+	create table Issue (
+	Lib_Issue_Id int(10),
+	Book_No int(6),
+	Member_Id int(5),
+	Issue_Date date,
+	Return_date date
+	); 
+
+2)View the structure of the tables.
+	desc Member_1;
+	desc Books; 
+	desc Issue;
+
+3)Delete/Drop the column Penalty_Amount from Member:
+	alter table Member_1 drop column Penalty_Amount; 
+
+4)Insert following data in table Member:
+	insert into Member_1 values(1,'Richa Sharma',"Pune","2005-12-10","Lifetime",1000);
+	insert into Member_1 values(2,'Garima Sen',"Pune",current_date(),"Annual",4000);
+
+5)Insert at least 5 records with suitable data and save it.
+	insert into Member_1 values(1,'Richa Sharma',"Pune","2005-12-10","Lifetime",1000);
+	insert into Member_1 values(2,'Garima Sen',"Pune",current_date(),"Annual",4000);
+	insert into Member_1 values(3,'Games Gosling',"Mumbai",current_date(),"Lifetime",8000);
+	insert into Member_1 values(4,'John Snow',"Bosari",current_date(),"Annual",9000);
+	insert into Member_1 values(5,'Tony Stark',"Kalyan",current_date(),"Lifetime",10000);
+
+6)Insert data in Book table as follows:
+	insert into Books values (101,"Let us C","Denis Ritchie",450,"System");
+	insert into Books values (102,"Oracle – Complete Ref","Loni",550,"Database");
+	insert into Books values (103,"Mastering SQL","Loni",250,"Database");
+	insert into Books values (104,"PL SQL-Ref","ScottUrman",750,"Database");
+
+
+7)View the data in the tables using simple SQL query.
+	select * from Member_1;
+	select * from Books;
+
+8)Modify the price of book with id 103 to Rs 300 and category to RDBMS:
+	UPDATE Books SET Cost=300 WHERE Book_No= 103;        
+
+9)Drop table Issue.
+	drop table Issue;
+
+10)Again Create table Issue and insert following data into Issue table. Note leave the column Return_Date blank:
+
+	create table Issue (
+	Lib_Issue_Id int(10),
+	Book_No int(6),
+	Member_Id int(5),
+	Issue_Date date,
+	Return_date date
+	); 
+
+	insert into Issue values(7001,101,1,'10-12-06',null);
+	insert into Issue values(7002,102,2,'25-12-06',null);
+	insert into Issue values(7003,104,1,'15-01-06',null);
+	insert into Issue values(7004,101,1,'04-07-06',null);
+	insert into Issue values(7005,104,2,'15-09-06',null);
+	insert into Issue values(7006,101,3,'18-02-06',null);
+
+	
+
