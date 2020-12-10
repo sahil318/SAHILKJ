@@ -1,0 +1,76 @@
+1.	Write a Procedure that accepts values of two non-zero numbers using IN parameter and perform addition, subtraction, multiplication, division and print.
+use assign;
+delimiter $$
+create procedure math(in a int , in b int)
+begin
+select a+b as addition, a*b as multiplication , a/b as division;
+end $$
+call math(2,2);
+
+=====================================================================================================================================================================================================
+2.	Write a Procedure to print the string in REVERSE order. Take the input using IN parameter. (Ex .Database , o/p :esabatad)
+
+delimiter$$
+create procedure str1(in str varchar(20))
+begin
+select REVERSE(str);
+end $$
+
+call str1("MYSQL");
+========================================================================================================================================================================================================
+
+3.	Write a Procedure to display top 5 employee based on highest salary and display employee number, employee name and salary.
+create procedure sall()
+begin
+ select EMPNO ,ENAME,SAL from emp order by sal desc limit 5;
+ end $$
+ call sall();
+
+=========================================================================================================================================================================================================
+4.	Write a Procedure to create table emp_test with e_id integer, e_name varchar(10), e_joining_date date as columns
+delimiter ##
+create procedure tabless()
+begin
+create table emp_test(e_id integer, e_name varchar(10), e_joining_date date);
+select emp_test;
+end ##
+call tabless();
+==================================================================================================================================
+5.	Write a Procedure to add a department row in the DEPT table with the following values for columns
+                     deptno  vaue 60,Dname  value should be  ‘Education’, area value should be Pune. 
+create procedure adding()
+begin
+insert into dept(dno , dname , area) values(70,'EDUCATION','PUNE');
+end $$
+call adding();
+===================================================================================================================================================================
+6.	Write a program that declares an integer variable called num, assigns a value to it and print, the value of the variable itself, its square, and its cube.
+delimiter $$
+create procedure decl(in num int)
+begin
+select sqrt(num);
+select num*num;
+select power(num,3);
+end $$
+call decl(2);
+========================================================================================================================================================================
+7.	Write a program that declares an integer variable assign a value to it and display it using OUT parameter.
+delimiter $$
+create procedure usingout(out num int)
+begin
+declare b int default 10;
+set num = b;
+end $$
+call usingout(@vv);
+select @vv;
+===================================================================================
+
+8.	Write a program that demonstrates the usage of IN and OUT parameters.
+
+create procedure together(inout x int)
+begin
+declare z int default 20;
+set x= z;
+end $$
+call together(@aa);
+select @aa;
