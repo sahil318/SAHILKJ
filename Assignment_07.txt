@@ -1,0 +1,109 @@
+use assignment;
+show tables;
+SET SQL_SAFE_UPDATES = 0;
+
+create table Ord_master(  Ord_no int(20),  Cust_cd varchar(20), Status varchar(10));
+insert into ord_master values (1,'C1','P');
+SELECT * FROM ORD_MASTER;
+
+create table  Ord_dtl(   Ord_no  int(20),  Prod_cd  varchar(20), Qty int(10));
+insert into Ord_dtl values (1,'P1',100);
+insert into Ord_dtl values (1,'P2',200);
+SELECT * FROM ORD_DTL;
+
+create table   Prod_master( Prod_cd varchar(20), Prod_name varchar(20), Qty_in_stock  int(10), Booked_qty int(10));
+insert into Prod_master values ('P1','FLOPPIES',10000,1000);
+insert into Prod_master values ('P2','PRINTERS',5000,600);
+insert into Prod_master values ('P3','MODEMS',3000,200);
+SELECT * FROM PROD_MASTER;
+
+/*----------------------------------------------------------------------------------------------------------------*/
+/* 1. Write a Before Insert trigger on Ord_dtl. Anytime a row is inserted in Ord_dtl, the
+Booked_qty in Prod_master should be increased accordingly.*/
+
+DELIMITER $$
+CREATE TRIGGER AAD_BOOKED_QTY 
+BEFORE INSERT 
+ON  Ord_dtl
+FOR EACH ROW
+BEGIN
+update Prod_master set Booked_Qty=Booked_Qty+new.Qty where Prod_cd=new.Prod_cd;
+END;$$
+
+insert into Ord_dtl values(3,'P3',300);
+
+/*----------------------------------------------------------------------------------------------------------------*/
+
+/*2. Write a Before Delete trigger on Ord_dtl. Anytime a row is deleted from Ord_dtl, the
+Booked_qty in Prod_master should be decreased accordingly.*/
+
+CREATE TRIGGER AAD_BOOKED_QTY 
+AFTER  DELETE 
+ON  Ord_dtl
+FOR EACH ROW
+BEGIN
+update Prod_master set Booked_Qty=Booked_Qty-new.Qty where Prod_cd=new.Prod_cd;
+END;$$
+
+/*----------------------------------------------------------------------------------------------------------------*/
+
+
+ /* 3. write A trigger to update the total salary of a department in dept_sal  table  when an employee is added or removed from  emp table .
+Create table dept_sal (dept_no, tota_salary) – this table contains the total of salaries of employees working into that particular department*/
+	
+
+delimiter $$
+CREATE TRIGGER QUE3 
+AFTER INSERT ON EMP
+FOR EACH ROW
+BEGIN
+UPDATE DEPT_SAL SET tota_salary=tota_salary + NEW.SAL WHERE DEPT_NO=NEW.DEPTNO;
+END$$
+-- INSERT INTO EMP values(1007 , 'MEGHANA', 'DEVELOPER', 1006 ,  '2019-02-18', 5000, 30 );
+
+
+delimiter $$
+CREATE TRIGGER QUE4 
+AFTER DELETE ON EMP
+FOR EACH ROW
+BEGIN
+UPDATE DEPT_SAL SET tota_salary=tota_salary - OLD.SAL WHERE DEPT_NO=OLD.DEPTNO;
+END$$
+
+
+
+
+
+DELIMITER $$
+CREATE FUNCTION AVG11 (VAR1 VARCHAR(3), VAR2 VARCHAR(3)) RETURNS INT
+BEGIN
+DECLARE RESULT INT;
+DECLARE COUNTER INT;
+DECLARE C INT;
+SET C = 1;
+SET RESULT=0;
+ SET COUNTER =1;
+ STARTER:LOOP
+ IF(SELECT * FROM ANALYTICS WHERE SERIAL_NO= C )
+ THEN
+ IF ((SELECT COUNTRY_ID FROM ANALYTICS WHERE SERIAL_NO = C)= VAR2 AND
+ (SELECT CONTINENT_ID FROM ANALYTICS WHERE SERIAL_NO =  C) = VAR1)
+ THEN
+ SET RESULT=RESULT+(SELECT TOTAL FROM ANALYTICS WHERE SERIAL_NO=C AND CONTINENT_ID=VAR1 AND COUNTRY_ID=VAR2);
+ SET COUNTER =COUNTER+1;
+ END IF;
+SET  C=C+1;
+ END IF;
+ iterate starter;
+ END LOOP STARTER; 
+ RETURN (RESULT/COUNTER);
+END$$
+SELECT AVG11('AS','IN');
+
+
+
+
+
+
+
+
